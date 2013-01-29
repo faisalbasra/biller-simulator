@@ -2,94 +2,93 @@ Biller Simulator
 ================
 
 
-Deskripsi
+Description
 ----------------
 
-Aplikasi ini merupakan simulator yang digunakan di ArtiVisi untuk melakukan tes terhadap aplikasi payment gateway kami.
-Fitur aplikasi ini :
+This application is used in ArtiVisi simulator to test the application of our payment gateway.
+This application features:
 
-*  manajemen pelanggan
-*  manajemen dummy data tagihan
-*  Gateway [ISO-8583](http://en.wikipedia.org/wiki/ISO_8583) untuk melakukan pembayaran tagihan untuk pelanggan yang ada di database.
+* Customer management
+* Data management dummy bill
+* Gateway [ISO-8583] (http://en.wikipedia.org/wiki/ISO_8583) to make bill payments to existing customers in the database.
 
 
-Teknologi yang digunakan
+The technology used
 ------------------------
 
-*  Java SDK 1.6
-*  Spring Framework 3.0.5
-*  Hibernate 3.6.0
-*  MySQL 5.1
-*  Jetty 6.1.26
-*  Maven 2.2.1
-*  jPOS 1.7.0
+* Java SDK 1.6
+* Spring Framework 3.0.5
+* Hibernate 3.6.0
+* MySQL 5.1
+* Jetty 6.1.26
+* Maven 2.2.1
+* JPOS 1.7.0
 
-Cara menyiapkan database
+How to set up a database
 -----------------------------
-Aplikasi ini menggunakan Hibernate, sehingga secara teoritis mendukung [semua database yang didukung oleh Hibernate](http://docs.jboss.org/hibernate/core/3.6/reference/en-US/html/session-configuration.html#configuration-optional-dialects). Walaupun demikian, development dan test dilakukan menggunakan MySQL.
+This application uses Hibernate, so theoretically support [all databases supported by Nevertheless, the development and the tests carried out using MySQL.
 
-Konfigurasi koneksi database dilakukan di beberapa tempat, yaitu :
-*  pom.xml di root folder : digunakan untuk drop dan create database, dijalankan pada saat automated test dieksekusi
-*  jdbc.properties di folder biller-simulator-config/src/main/resources : digunakan oleh aplikasi pada saat dijalankan
+Configuring the database connection done in some places, namely:
+* Pom.xml in the root folder: it is used to drop and create the database, run the automated test execution time
+* Jdbc.properties biller-simulator-config/src/main/resources folder: it is used by applications at run time
 
-Untuk konfigurasi di pom.xml, berikan username MySQL yang memiliki privileges untuk drop dan create database. Biasanya saya menggunakan user root saja supaya gampang.
-Untuk konfigurasi di jdbc.properties, usernamenya cukup memiliki akses ke database yang digunakan di aplikasi saja.
+For configuration in pom.xml, give MySQL username that has privileges to drop and create the database. Usually I use the root user to be an easy course.
+For configuration jdbc.properties, usernamenya enough to have access to a database that is used in the application only.
 
-Berikut sintaks SQL untuk membuat username, password, dan database di MySQL. Perintah ini dijalankan dengan user root
+The following SQL syntax to create a username, password, and database in MySQL. The command is run as root
 
-```sql
+`` `Sql
 create database ppob_simulator;
-grant all on ppob_simulator.* to simulator identified by 'simulator';
-```
+grant all on ppob_simulator. * to simulators identified by 'simulator';
+`` `
 
-Cara menjalankan aplikasi web
+How to run a web application
 -----------------------------
 
-Aplikasi web digunakan untuk mengelola data pelanggan dan tagihan.
+The web application is used to manage customer data and billing.
 
-1. Buka command prompt, lalu masuk ke folder tempat source code aplikasi
-2. Jalankan mvn clean install
-3. Masuk ke folder biller-simulator-ui-jsf
-4. Jalankan mvn clean jetty:run
-5. Arahkan browser ke http://localhost:8080/biller-simulator-ui-jsf/faces/index.xhtml
+1. Open a command prompt and go to the folder where the application source code
+2. Run mvn clean install
+3. Go to the folder biller-simulator-ui-JSF
+4. Run mvn clean jetty: run
+5. Point your browser to http://localhost:8080/biller-simulator-ui-jsf/faces/index.xhtml
 
-Cara menjalankan gateway pln
+How to run the gateway pln
 -----------------------------
 
-Gateway PLN digunakan untuk melakukan transaksi inquiry dan payment tagihan listrik melalui protokol ISO-8583
+Gateway PLN used to conduct inquiry and payment transactions electricity bills through the ISO-8583 protocol
 
-1. Buka command prompt, lalu masuk ke folder tempat source code aplikasi
-2. Jalankan mvn clean install
-3. Masuk ke folder biller-simulator-gateway-pln
-4. Jalankan mvn exec:java -Dexec.mainClass="com.artivisi.biller.simulator.gateway.pln.Launcher"
-5. ISO-8583 gateway siap menunggu di port 11111
+1. Open a command prompt and go to the folder where the application source code
+2. Run mvn clean install
+3. Go to the folder biller-simulator-gateway-pln
+4. Run mvn exec: java-Dexec.mainClass = "com.artivisi.biller.simulator.gateway.pln.Launcher"
+5. ISO-8583 gateway is ready to wait in port 11 111
 
-Cara kontribusi
+How to contribute
 ---------------
-Anda ingin berkontribusi? Baguslah kalau begitu.
+You want to contribute? Good for you.
 
-Ada beberapa kontribusi yang bisa Anda lakukan, diantaranya :
+There are several contributions that you can do, including:
 
-*  Melakukan testing
-*  Membuatkan dokumentasi
-*  Mengedit source code, baik untuk fix bugs maupun menambah fitur
+* Perform testing
+* Make documentation
+* Edit the source code, either to fix bugs or add features
 
-Untuk kontribusi testing, berikut caranya :
+For contributions to testing, here's how:
 
-1. Jalankan aplikasinya, yang web atau yang ISO-8583 terserah.
-2. Test fitur-fiturnya.
-3. Kalau ada error/bug yang ditemukan, silakan langsung [membuat issue baru](https://github.com/artivisi/biller-simulator/issues/new).
-Mohon mengikuti [panduan melaporkan bug](http://endy.artivisi.com/blog/java/tips-melaporkan-error/), supaya mudah ditindak lanjuti oleh programmer.
-Bug report maupun request fitur boleh ditulis dalam bahasa Indonesia atau Inggris.
+1. Run the application, the web or the ISO-8583 is up.
+2. Test its features.
+3. If there are errors / bugs found, please direct [create a new issue] (https://github.com/artivisi/biller-simulator/issues/new).
+We follow [your bug report] (http://endy.artivisi.com/blog/java/tips-melaporkan-error/), so easily acted on by the programmer.
+Bug reports and feature requests should be written in Indonesian or English.
 
-Untuk kontribusi dokumentasi, sementara kami akan menyiapkan dulu template dokumentasinya.
-Bila sudah ada, kami akan update bagian ini dengan langkah-langkah untuk kontribusi.
+For contributions to the documentation, while we will prepare the first template documentation.
+When you are there, we will update this section with steps to contribute.
 
-Untuk kontribusi source code, berikut caranya :
+To contribute source code, here's how:
 
-1. Fork repository ini menjadi repository Anda sendiri
-2. Clone ke local untuk diedit
-3. Editlah sesuka hati
-4. Commit dan push ke repository Anda sendiri
-5. Kirim pull request ke saya supaya bisa saya merge ke repository saya
-
+1. Fork this repository into your own repository
+2. Clone to the local for editing
+3. Edit your heart
+4. Commit and push to the repository on your own
+5. Send pull request to me so I can merge into my repository
